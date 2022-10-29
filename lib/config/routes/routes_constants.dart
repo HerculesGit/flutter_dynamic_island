@@ -1,0 +1,3 @@
+const initialRoute = '/';
+
+const kHomeView = '/';
