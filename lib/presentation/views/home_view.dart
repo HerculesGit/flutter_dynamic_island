@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
-import '../widgets/airpods_island_widget.dart';
+import '../widgets/silent_island_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -53,14 +53,14 @@ class _HomeViewState extends State<HomeView> {
     final double width = MediaQuery.of(context).size.width;
     return AnimatedContainer(
       width: controller.isDefaultIcon ? width * 0.3 : width * 0.5,
-      height: 30,
+      height: 35,
       duration: const Duration(milliseconds: 200),
       margin: const EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(25),
       ),
-      child: AirpodsIslandWidget(opacity: controller.opacity),
+      child: SilentIslandWidget(opacity: controller.opacity),
     );
   }
 }
