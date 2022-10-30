@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
+import '../widgets/airpods_island_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -59,36 +60,7 @@ class _HomeViewState extends State<HomeView> {
         color: Colors.black,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: airpods(controller),
-    );
-  }
-
-  Widget center() {
-    final double width = MediaQuery.of(context).size.width;
-    return Container(width: width / 3.5, height: 30);
-  }
-
-  Widget airpods(AnimatedDynamicIsland controller) {
-    return Row(
-      children: [
-        AnimatedOpacity(
-          opacity: controller.opacity,
-          duration: const Duration(milliseconds: 100),
-          child: const Padding(
-            padding: EdgeInsets.only(left: 4.0),
-            child: Icon(Icons.headphones_rounded, color: Colors.white),
-          ),
-        ),
-        const Spacer(),
-        AnimatedOpacity(
-          opacity: controller.opacity,
-          duration: const Duration(milliseconds: 100),
-          child: const Padding(
-            padding: EdgeInsets.only(right: 4.0),
-            child: Icon(Icons.circle_outlined, color: Colors.green),
-          ),
-        )
-      ],
+      child: AirpodsIslandWidget(opacity: controller.opacity),
     );
   }
 }
