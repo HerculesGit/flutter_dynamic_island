@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 
 class AnimatedDynamicIsland extends ChangeNotifier {
   bool isDefaultIcon = false;
-
-  bool _showIcons = true;
   double opacity = 0.0;
+
+  bool expandedIsland = false;
 
   changeButton() async {
     isDefaultIcon = !isDefaultIcon;

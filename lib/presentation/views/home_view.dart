@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
+import '../widgets/music_island_widget.dart';
 import '../widgets/silent_island_widget.dart';
 
 class HomeView extends StatefulWidget {
@@ -60,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
         color: Colors.black,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: SilentIslandWidget(opacity: controller.opacity),
+      child: MusicIslandWidget(opacity: controller.opacity, expanded: false),
     );
   }
 }
