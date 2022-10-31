@@ -16,6 +16,11 @@ class AnimatedDynamicIsland extends ChangeNotifier {
     }
   }
 
+  expandButton() {
+    expandedIsland = !expandedIsland;
+    notifyListeners();
+  }
+
   showIcons() {
     opacity = 1.0;
     notifyListeners();

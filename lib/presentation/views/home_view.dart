@@ -41,6 +41,14 @@ class _HomeViewState extends State<HomeView> {
                       color: Colors.blue,
                       child: const Text('change island')),
                 ),
+                const SizedBox(height: 10),
+                InkWell(
+                  onTap: () => controller.expandButton(),
+                  child: Container(
+                      padding: EdgeInsets.all(10),
+                      color: Colors.blue,
+                      child: const Text('Expaded')),
+                ),
                 const SizedBox(height: 32),
               ],
             ),
@@ -52,16 +60,24 @@ class _HomeViewState extends State<HomeView> {
 
   Widget buildDynamicIslandScaffold(AnimatedDynamicIsland controller) {
     final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
+
     return AnimatedContainer(
-      width: controller.isDefaultIcon ? width * 0.3 : width * 0.5,
-      height: 35,
+      // curve: Curves.easeInOutQuart,
+      width: controller.isDefaultIcon ? width * 0.3 : width * 0.97,
+      height: controller.expandedIsland ? height * 0.22 : 35,
       duration: const Duration(milliseconds: 200),
       margin: const EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: MusicIslandWidget(opacity: controller.opacity, expanded: false),
+      child: MusicIslandWidget(
+        opacity: controller.opacity,
+        width: width * 0.97,
+        height: height * 0.22,
+        expanded: controller.expandedIsland,
+      ),
     );
   }
 }
