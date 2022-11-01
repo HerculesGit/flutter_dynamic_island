@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
+import '../widgets/charging_island_widget.dart';
 import '../widgets/music_island_widget.dart';
 import '../widgets/silent_island_widget.dart';
 
@@ -63,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
     final double height = MediaQuery.of(context).size.height;
 
     return AnimatedContainer(
-      // curve: Curves.easeInOutQuart,
+      curve: Curves.easeInOutQuart,
       width: controller.isDefaultIcon ? width * 0.3 : width * 0.97,
       height: controller.expandedIsland ? height * 0.22 : 35,
       duration: const Duration(milliseconds: 200),
@@ -72,12 +73,7 @@ class _HomeViewState extends State<HomeView> {
         color: Colors.black,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: MusicIslandWidget(
-        opacity: controller.opacity,
-        width: width * 0.97,
-        height: height * 0.22,
-        expanded: controller.expandedIsland,
-      ),
+      child: ChargingIslandWidget(opacity: controller.opacity),
     );
   }
 }
