@@ -11,13 +11,19 @@ class MusicIslandWidget extends IslandFactory {
       required super.normalHeight,
       required super.expandedWidth,
       required super.expandedHeight,
-      required super.opacity,
       required super.islandState})
       : super(key: key);
 
   @override
   Widget buildBody(BuildContext context, Size size) {
     final bool expanded = islandState == IslandState.expanded;
+    double opacity = 0.0;
+
+    if (islandState == IslandState.expanded ||
+        islandState == IslandState.normal) {
+      opacity = 1.0;
+    }
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       // alignment: Alignment.center,

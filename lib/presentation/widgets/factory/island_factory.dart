@@ -10,11 +10,9 @@ abstract class IslandFactory extends StatelessWidget {
   final double expandedHeight;
   final IslandState islandState;
   final bool expandable;
-  final double opacity;
 
   const IslandFactory(
       {Key? key,
-      required this.opacity,
       required this.normalWidth,
       required this.expandedWidth,
       required this.normalHeight,
@@ -45,10 +43,11 @@ abstract class IslandFactory extends StatelessWidget {
       duration: const Duration(milliseconds: 200),
       margin: const EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.2),
+        color: Colors.black,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: buildBody(context, Size(width, height)),
+      child: islandState != IslandState.none
+          ? buildBody(context, Size(width, height)) : Container(),
     );
   }
 }
