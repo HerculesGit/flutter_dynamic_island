@@ -4,18 +4,19 @@ import 'package:flutter_dynamic_island/presentation/widgets/factory/island_facto
 import 'animated_opacity_widget.dart';
 
 class MusicIslandWidget extends IslandFactory {
-   MusicIslandWidget(
-      {Key? key,
-      super.expandable = true,
-      required super.normalWidth,
-      required super.normalHeight,
-      required super.expandedWidth,
-      required super.expandedHeight,
-      required super.islandState})
-      : super(key: key);
+  MusicIslandWidget({
+    Key? key,
+    super.expandable = true,
+    super.name = 'Music',
+    super.normalWidth = 0.5,
+    super.normalHeight = 0.2,
+    super.expandedWidth = 0.97,
+    super.expandedHeight = 0.2,
+  }) : super(key: key);
 
   @override
   Widget buildBody(BuildContext context, Size size) {
+    final islandState = controller.islandState;
     final bool expanded = islandState == IslandState.expanded;
     double opacity = 0.0;
 

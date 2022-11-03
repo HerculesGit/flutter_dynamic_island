@@ -3,36 +3,6 @@ import 'package:flutter/foundation.dart';
 import '../widgets/factory/island_factory.dart';
 
 class AnimatedDynamicIsland extends ChangeNotifier {
-  bool isDefaultIcon = false;
-  double opacity = 0.0;
-
-  bool expandedIsland = false;
-
-  changeButton() async {
-    isDefaultIcon = !isDefaultIcon;
-
-    if (isDefaultIcon) {
-      hideIcons();
-    } else {
-      showIcons();
-    }
-  }
-
-  expandButton() {
-    expandedIsland = !expandedIsland;
-    notifyListeners();
-  }
-
-  showIcons() {
-    opacity = 1.0;
-    notifyListeners();
-  }
-
-  hideIcons() {
-    opacity = 0.0;
-    notifyListeners();
-  }
-
   late IslandFactory currentIsland;
   bool displayBackButton = false;
   bool displayExpandedButton = false;
@@ -50,32 +20,33 @@ class AnimatedDynamicIsland extends ChangeNotifier {
   didTapIsland(IslandFactory island) {
     currentIsland = island;
 
-    currentIsland.islandState = IslandState.normal;
+    currentIsland.changeState(IslandState.normal);
 
     showBackButton();
     changeExpandedButtonVisibility();
   }
 
   didTapBackButton() {
-    currentIsland.islandState = IslandState.none;
+    currentIsland.changeState(IslandState.none);
+
     _hideExpandedButton();
     hideBackButton();
   }
 
   didTapExpandButton() {
-    currentIsland.islandState = IslandState.expanded;
+    currentIsland.changeState(IslandState.expanded);
     notifyListeners();
     _hideExpandedButton();
   }
 
   showDefaultIsland() {
-    currentIsland.islandState = IslandState.none;
+    currentIsland.changeState(IslandState.none);
     notifyListeners();
   }
 
   void changeExpandedButtonVisibility() {
     if (currentIsland.expandable &&
-        currentIsland.islandState == IslandState.normal) {
+        currentIsland.controller.islandState == IslandState.normal) {
       _showExpandedButton();
     } else {
       _hideExpandedButton();

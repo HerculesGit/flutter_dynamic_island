@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_island/presentation/widgets/charging_island_widget.dart';
-import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
 import 'package:flutter_dynamic_island/presentation/widgets/music_island_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -17,18 +16,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     Provider.of<AnimatedDynamicIsland>(context, listen: false)
-        .loadDynamicIsland([
-      ChargingIslandWidget(islandState: IslandState.none),
-      MusicIslandWidget(
-          // width
-          normalWidth: 0.5,
-          expandedWidth: 0.97,
-
-          // height
-          normalHeight: 0.2,
-          expandedHeight: 0.2,
-          islandState: IslandState.none)
-    ]);
+        .loadDynamicIsland([ChargingIslandWidget(), MusicIslandWidget()]);
     super.initState();
   }
 
@@ -63,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
                           child: Container(
                             padding: EdgeInsets.all(10),
                             color: Colors.red,
-                            child: Text('${island.toString()}'),
+                            child: Text('${island.name}'),
                           ),
                         ),
                       )
