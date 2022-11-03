@@ -4,6 +4,7 @@ import 'package:flutter_dynamic_island/presentation/widgets/music_island_widget.
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
+import '../widgets/silent_island_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -16,7 +17,11 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     Provider.of<AnimatedDynamicIsland>(context, listen: false)
-        .loadDynamicIsland([ChargingIslandWidget(), MusicIslandWidget()]);
+        .loadDynamicIsland([
+      ChargingIslandWidget(),
+      MusicIslandWidget(),
+      SilentIslandWidget()
+    ]);
     super.initState();
   }
 

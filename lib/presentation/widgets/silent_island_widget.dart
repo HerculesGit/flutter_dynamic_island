@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
+import 'package:flutter_dynamic_island/presentation/widgets/factory/no_expanded_island.dart';
 
 import 'animated_opacity_widget.dart';
 
-class SilentIslandWidget extends StatelessWidget {
-  final double opacity;
-
-  const SilentIslandWidget({Key? key, required this.opacity}) : super(key: key);
+class SilentIslandWidget extends NoExpandedIsland {
+  SilentIslandWidget(
+      {Key? key,
+      super.name = 'Silent',
+      super.normalWidth = 0.6,
+      super.normalHeight = 0.2})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    const redColor = Colors.red;
-
+  Widget buildBody(BuildContext context, Size size) {
+    final double opacity =
+        controller.islandState == IslandState.none ? 0.0 : 1.0;
     return Row(
       children: [
         AnimatedOpacityWidget(
@@ -20,7 +25,7 @@ class SilentIslandWidget extends StatelessWidget {
             margin: const EdgeInsets.only(left: 2.0),
             padding: const EdgeInsets.symmetric(horizontal: 14.0),
             decoration: BoxDecoration(
-                color: redColor, borderRadius: BorderRadius.circular(25.0)),
+                color: Colors.red, borderRadius: BorderRadius.circular(25.0)),
             child: const Icon(
               Icons.notifications_off_rounded,
               color: Colors.white,
@@ -33,7 +38,7 @@ class SilentIslandWidget extends StatelessWidget {
           isRight: true,
           child: const Padding(
             padding: EdgeInsets.only(right: 8.0),
-            child: Text('Silent', style: TextStyle(color: redColor)),
+            child: Text('Silent', style: TextStyle(color: Colors.red)),
           ),
         ),
       ],
