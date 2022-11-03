@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
+import 'package:flutter_dynamic_island/presentation/widgets/music_island_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
-import '../widgets/charging_island_widget.dart';
-import '../widgets/music_island_widget.dart';
-import '../widgets/silent_island_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -60,20 +59,15 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget buildDynamicIslandScaffold(AnimatedDynamicIsland controller) {
-    final double width = MediaQuery.of(context).size.width;
-    final double height = MediaQuery.of(context).size.height;
+    return const MusicIslandWidget(
+        // width
+        normalWidth: 0.5,
+        expandedWidth: 0.97,
 
-    return AnimatedContainer(
-      curve: Curves.easeInOutQuart,
-      width: controller.isDefaultIcon ? width * 0.3 : width * 0.97,
-      height: controller.expandedIsland ? height * 0.22 : 35,
-      duration: const Duration(milliseconds: 200),
-      margin: const EdgeInsets.only(top: 16.0),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: ChargingIslandWidget(opacity: controller.opacity),
-    );
+        // height
+        normalHeight: 0.2,
+        expandedHeight: 0.2,
+        opacity: 1.0,
+        islandState: IslandState.none);
   }
 }

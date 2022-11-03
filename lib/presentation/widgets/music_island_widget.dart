@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
 
 import 'animated_opacity_widget.dart';
 
-class MusicIslandWidget extends StatelessWidget {
-  final double opacity;
-  final bool expanded;
-
-  final double width;
-  final double height;
-
+class MusicIslandWidget extends IslandFactory {
   const MusicIslandWidget(
       {Key? key,
-      required this.opacity,
-      required this.expanded,
-      required this.width,
-      required this.height})
+      super.expandable = true,
+      required super.normalWidth,
+      required super.normalHeight,
+      required super.expandedWidth,
+      required super.expandedHeight,
+      required super.opacity,
+      required super.islandState})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return _buildBody();
-  }
-
-  Widget _buildBody() {
+  Widget buildBody(BuildContext context, Size size) {
+    final bool expanded = islandState == IslandState.expanded;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       // alignment: Alignment.center,
@@ -47,13 +42,15 @@ class MusicIslandWidget extends StatelessWidget {
                   opacity: opacity,
 
                   /// expanded mode -> true
-                  isRight: expanded ? false : false,
+                  isRight: expanded ? true : false,
                   child: AnimatedContainer(
-                    margin:
-                        EdgeInsets.only(left: 4.0, top: expanded ? 0.0 : 5.0),
+                    margin: EdgeInsets.only(
+                      left: expanded ? 0.0 : 4.0,
+                      top: expanded ? 0.0 : 5.0,
+                    ),
                     duration: const Duration(milliseconds: 200),
-                    height: expanded ? height * 0.3 : 24,
-                    width: expanded ? height * 0.3 : 24,
+                    height: expanded ? size.height * 0.3 : 24,
+                    width: expanded ? size.height * 0.3 : 24,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 2.0, vertical: 1.0),
                     decoration: BoxDecoration(
@@ -77,9 +74,9 @@ class MusicIslandWidget extends StatelessWidget {
                   child: AnimatedOpacityWidget(
                     opacity: opacity,
                     isRight: false,
-                    child: const Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: Icon(Icons.signal_cellular_alt_rounded,
+                    child: Padding(
+                        padding: EdgeInsets.only(right: expanded ? 0.0 : 8.0),
+                        child: const Icon(Icons.signal_cellular_alt_rounded,
                             color: Colors.yellow)),
                   ),
                 ),
