@@ -4,7 +4,7 @@ import 'package:flutter_dynamic_island/presentation/widgets/factory/island_facto
 import 'animated_opacity_widget.dart';
 
 class MusicIslandWidget extends IslandFactory {
-  const MusicIslandWidget(
+   MusicIslandWidget(
       {Key? key,
       super.expandable = true,
       required super.normalWidth,

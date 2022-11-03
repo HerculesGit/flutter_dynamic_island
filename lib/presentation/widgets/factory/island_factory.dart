@@ -8,10 +8,10 @@ abstract class IslandFactory extends StatelessWidget {
   final double normalHeight;
   final double expandedWidth;
   final double expandedHeight;
-  final IslandState islandState;
+  IslandState islandState;
   final bool expandable;
 
-  const IslandFactory(
+   IslandFactory(
       {Key? key,
       required this.normalWidth,
       required this.expandedWidth,

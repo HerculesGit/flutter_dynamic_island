@@ -5,7 +5,6 @@ import 'package:flutter_dynamic_island/presentation/widgets/music_island_widget.
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
-import '../widgets/airpods_island_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -15,6 +14,24 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    Provider.of<AnimatedDynamicIsland>(context, listen: false)
+        .loadDynamicIsland([
+      ChargingIslandWidget(islandState: IslandState.none),
+      MusicIslandWidget(
+          // width
+          normalWidth: 0.5,
+          expandedWidth: 0.97,
+
+          // height
+          normalHeight: 0.2,
+          expandedHeight: 0.2,
+          islandState: IslandState.none)
+    ]);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) =>
       SafeArea(child: Scaffold(body: _buildBody()));
@@ -33,25 +50,47 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
           Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: Wrap(
+                runSpacing: 15,
+                spacing: 130,
+                children: [
+                  ...controller.dynamicIsland
+                      .map(
+                        (island) => GestureDetector(
+                          onTap: () => controller.didTapIsland(island),
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            color: Colors.red,
+                            child: Text('${island.toString()}'),
+                          ),
+                        ),
+                      )
+                      .toList()
+                ],
+              ),
+            ),
+          ),
+          Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                  onTap: () => controller.changeButton(),
-                  child: Container(
-                      padding: EdgeInsets.all(8),
-                      color: Colors.blue,
-                      child: const Text('change island')),
+                IconButton(
+                  onPressed: () {
+                    controller.didTapBackButton();
+                  },
+                  icon: Icon(Icons.arrow_back),
                 ),
-                const SizedBox(height: 10),
-                InkWell(
-                  onTap: () => controller.expandButton(),
-                  child: Container(
-                      padding: EdgeInsets.all(10),
+                if (controller.displayExpandedButton)
+                  GestureDetector(
+                    onTap: () => controller.didTapExpandButton(),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 16),
                       color: Colors.blue,
-                      child: const Text('Expaded')),
-                ),
-                const SizedBox(height: 32),
+                      child: Text('Expand'),
+                    ),
+                  )
               ],
             ),
           )
@@ -61,30 +100,6 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget buildDynamicIslandScaffold(AnimatedDynamicIsland controller) {
-    // final double width = MediaQuery.of(context).size.width;
-    // return AnimatedContainer(
-    //   width: controller.isDefaultIcon ? width * 0.3 : width * 0.5,
-    //   height: 30,
-    //   duration: const Duration(milliseconds: 200),
-    //   margin: const EdgeInsets.only(top: 16.0),
-    //   decoration: BoxDecoration(
-    //     color: Colors.black,
-    //     borderRadius: BorderRadius.circular(15),
-    //   ),
-    //   child: AirpodsIslandWidget(opacity: controller.opacity),
-    // );
-    return ChargingIslandWidget(
-      islandState: IslandState.normal,
-    );
-
-    return const MusicIslandWidget(
-        // width
-        normalWidth: 0.5,
-        expandedWidth: 0.97,
-
-        // height
-        normalHeight: 0.2,
-        expandedHeight: 0.2,
-        islandState: IslandState.none);
+    return controller.currentIsland.build(context);
   }
 }

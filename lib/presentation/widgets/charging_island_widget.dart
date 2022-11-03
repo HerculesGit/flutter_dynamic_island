@@ -5,7 +5,7 @@ import 'package:flutter_dynamic_island/presentation/widgets/factory/no_expanded_
 import 'animated_opacity_widget.dart';
 
 class ChargingIslandWidget extends NoExpandedIsland {
-  const ChargingIslandWidget(
+   ChargingIslandWidget(
       {Key? key,
       super.normalWidth = 0.7,
       super.normalHeight = 0.2,

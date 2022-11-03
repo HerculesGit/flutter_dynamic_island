@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
 
 abstract class NoExpandedIsland extends IslandFactory {
-  const NoExpandedIsland(
+   NoExpandedIsland(
       {Key? key,
       super.expandable = false,
       super.expandedWidth = 0.0,
