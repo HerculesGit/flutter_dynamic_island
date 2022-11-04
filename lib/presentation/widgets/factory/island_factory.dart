@@ -51,10 +51,10 @@ abstract class IslandFactory extends StatelessWidget {
     }
 
     return AnimatedContainer(
-      curve: Curves.easeInOutQuart,
+      curve: Curves.easeOutBack,
       width: width,
       height: height,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 500),
       margin: const EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
         color: Colors.black,

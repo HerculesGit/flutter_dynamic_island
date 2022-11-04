@@ -10,7 +10,7 @@ class MusicIslandWidget extends IslandFactory {
     super.name = 'Music',
     super.normalWidth = 0.5,
     super.normalHeight = 0.2,
-    super.expandedWidth = 0.97,
+    super.expandedWidth = 0.95,
     super.expandedHeight = 0.2,
   }) : super(key: key);
 
