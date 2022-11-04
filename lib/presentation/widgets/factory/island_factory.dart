@@ -29,7 +29,7 @@ abstract class IslandFactory extends StatelessWidget {
     this.expandable = false,
   }) : super(key: key);
 
-  Widget buildBody(BuildContext context, Size size);
+  Widget buildBody(final Size size, final double opacity);
 
   changeState(IslandState newState) {
     controller.changeState(newState);
@@ -61,7 +61,8 @@ abstract class IslandFactory extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius()),
       ),
       child: islandState != IslandState.none
-          ? buildBody(context, Size(width, height))
+          ? buildBody(
+              Size(width, height), islandState == IslandState.none ? 0.0 : 1.0)
           : Container(),
     );
   }

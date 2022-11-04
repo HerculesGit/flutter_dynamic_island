@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
 import 'package:flutter_dynamic_island/presentation/widgets/factory/no_expanded_island.dart';
 
 import 'animated_opacity_widget.dart';
@@ -13,8 +12,7 @@ class ChargingIslandWidget extends NoExpandedIsland {
       : super(key: key);
 
   @override
-  Widget buildBody(BuildContext context, Size size) {
-    double opacity = controller.islandState == IslandState.normal ? 1.0 : 0.0;
+  Widget buildBody(final Size size, final double opacity) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: SizedBox.fromSize(

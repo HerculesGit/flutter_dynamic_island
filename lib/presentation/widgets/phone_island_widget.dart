@@ -19,9 +19,7 @@ class PhoneIslandWidget extends IslandFactory {
   double borderRadius() => 100.0;
 
   @override
-  Widget buildBody(BuildContext context, Size size) {
-    final double opacity =
-        controller.islandState == IslandState.none ? 0.0 : 1.0;
+  Widget buildBody(final Size size, final double opacity) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: SizedBox.fromSize(
@@ -56,7 +54,8 @@ class PhoneIslandWidget extends IslandFactory {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: controller.islandState == IslandState.expanded
                     ? _buildCallButtons(size)
-                    : const Text('IiIIIIi', style: const TextStyle(color: Colors.green)),
+                    : const Text('IiIIIIi',
+                        style: const TextStyle(color: Colors.green)),
               ),
             ),
           ],

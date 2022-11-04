@@ -4,6 +4,7 @@ import 'package:flutter_dynamic_island/presentation/widgets/music_island_widget.
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
+import '../widgets/airpods_island_widget.dart';
 import '../widgets/phone_island_widget.dart';
 import '../widgets/silent_island_widget.dart';
 
@@ -23,6 +24,7 @@ class _HomeViewState extends State<HomeView> {
       MusicIslandWidget(),
       SilentIslandWidget(),
       PhoneIslandWidget(),
+      AirpodsIslandWidget(),
     ]);
     super.initState();
   }

@@ -13,9 +13,7 @@ class SilentIslandWidget extends NoExpandedIsland {
       : super(key: key);
 
   @override
-  Widget buildBody(BuildContext context, Size size) {
-    final double opacity =
-        controller.islandState == IslandState.none ? 0.0 : 1.0;
+  Widget buildBody(final Size size, final double opacity) {
     return Row(
       children: [
         AnimatedOpacityWidget(

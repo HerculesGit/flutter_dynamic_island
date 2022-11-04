@@ -15,15 +15,9 @@ class MusicIslandWidget extends IslandFactory {
   }) : super(key: key);
 
   @override
-  Widget buildBody(BuildContext context, Size size) {
+  Widget buildBody(final Size size, final double opacity) {
     final islandState = controller.islandState;
     final bool expanded = islandState == IslandState.expanded;
-    double opacity = 0.0;
-
-    if (islandState == IslandState.expanded ||
-        islandState == IslandState.normal) {
-      opacity = 1.0;
-    }
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
