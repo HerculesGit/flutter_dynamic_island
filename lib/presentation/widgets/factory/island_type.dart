@@ -7,7 +7,7 @@ enum IslandType {
   phoneCall,
 }
 
-extension IslandTypeString on IslandType {
+extension IslandTypeInfo on IslandType {
   String get label {
     switch (this) {
       case IslandType.airpods:
@@ -27,7 +27,7 @@ extension IslandTypeString on IslandType {
     }
   }
 
-  String get size {
+  String size(final bool isExpanded) {
     switch (this) {
       case IslandType.airpods:
         return 'Airpods';

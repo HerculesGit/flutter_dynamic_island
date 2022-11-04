@@ -1,33 +1,75 @@
 import 'package:flutter/foundation.dart';
 
+import '../widgets/factory/island_factory.dart';
+
 class AnimatedDynamicIsland extends ChangeNotifier {
-  bool isDefaultIcon = false;
-  double opacity = 0.0;
+  late IslandFactory currentIsland;
+  bool displayBackButton = false;
+  bool displayExpandedButton = false;
+  bool displayIslandList = true;
 
-  bool expandedIsland = false;
+  final List<IslandFactory> dynamicIsland = [];
 
-  changeButton() async {
-    isDefaultIcon = !isDefaultIcon;
+  loadDynamicIsland(List<IslandFactory> islands) {
+    dynamicIsland.clear();
+    dynamicIsland.addAll(islands);
 
-    if (isDefaultIcon) {
-      hideIcons();
+    currentIsland = dynamicIsland.first;
+  }
+
+  didTapIsland(IslandFactory island) {
+    currentIsland = island;
+
+    currentIsland.changeState(IslandState.normal);
+
+    showBackButton();
+    changeExpandedButtonVisibility();
+  }
+
+  didTapBackButton() {
+    currentIsland.changeState(IslandState.none);
+
+    _hideExpandedButton();
+    hideBackButton();
+  }
+
+  didTapExpandButton() {
+    currentIsland.changeState(IslandState.expanded);
+    notifyListeners();
+    _hideExpandedButton();
+  }
+
+  showDefaultIsland() {
+    currentIsland.changeState(IslandState.none);
+    notifyListeners();
+  }
+
+  void changeExpandedButtonVisibility() {
+    if (currentIsland.expandable &&
+        currentIsland.controller.islandState == IslandState.normal) {
+      _showExpandedButton();
     } else {
-      showIcons();
+      _hideExpandedButton();
     }
   }
 
-  expandButton() {
-    expandedIsland = !expandedIsland;
+  _showExpandedButton() {
+    displayExpandedButton = true;
     notifyListeners();
   }
 
-  showIcons() {
-    opacity = 1.0;
+  _hideExpandedButton() {
+    displayExpandedButton = false;
     notifyListeners();
   }
 
-  hideIcons() {
-    opacity = 0.0;
+  showBackButton() {
+    displayBackButton = true;
+    notifyListeners();
+  }
+
+  hideBackButton() {
+    displayBackButton = false;
     notifyListeners();
   }
 }

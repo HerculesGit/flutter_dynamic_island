@@ -1,59 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
 
 import 'animated_opacity_widget.dart';
 
-class MusicIslandWidget extends StatelessWidget {
-  final double opacity;
-  final bool expanded;
-
-  final double width;
-  final double height;
-
-  const MusicIslandWidget(
-      {Key? key,
-      required this.opacity,
-      required this.expanded,
-      required this.width,
-      required this.height})
-      : super(key: key);
+class MusicIslandWidget extends IslandFactory {
+  MusicIslandWidget({
+    Key? key,
+    super.expandable = true,
+    super.name = 'Music',
+    super.normalWidth = 0.5,
+    super.normalHeight = 0.2,
+    super.expandedWidth = 0.95,
+    super.expandedHeight = 0.2,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return _buildBody();
-  }
+  Widget buildBody(final Size size, final double opacity) {
+    final islandState = controller.islandState;
+    final bool expanded = islandState == IslandState.expanded;
 
-  Widget _buildBody() {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      // alignment: Alignment.center,
-
-      /// expanded mode , else 0
       padding: EdgeInsets.all(expanded ? 16.0 : 0.0),
-
-      /// expanded mode was created this column
-      // child: SingleChildScrollView(
       child: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-              /// expanded mode
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
                 AnimatedOpacityWidget(
                   opacity: opacity,
-
-                  /// expanded mode -> true
-                  isRight: expanded ? false : false,
+                  isRight: expanded ? true : false,
                   child: AnimatedContainer(
-                    margin:
-                        EdgeInsets.only(left: 4.0, top: expanded ? 0.0 : 5.0),
+                    margin: EdgeInsets.only(
+                      left: expanded ? 0.0 : 4.0,
+                      top: expanded ? 0.0 : 5.0,
+                    ),
                     duration: const Duration(milliseconds: 200),
-                    height: expanded ? height * 0.3 : 24,
-                    width: expanded ? height * 0.3 : 24,
+                    height: expanded ? size.height * 0.3 : 24,
+                    width: expanded ? size.height * 0.3 : 24,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 2.0, vertical: 1.0),
                     decoration: BoxDecoration(
@@ -67,25 +55,22 @@ class MusicIslandWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                /// expanded mode
                 if (expanded) _buildMusicInfo(),
-
                 AnimatedContainer(
                   margin: EdgeInsets.only(left: 4.0, top: expanded ? 0.0 : 5.0),
                   duration: const Duration(milliseconds: 200),
                   child: AnimatedOpacityWidget(
                     opacity: opacity,
                     isRight: false,
-                    child: const Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: Icon(Icons.signal_cellular_alt_rounded,
+                    child: Padding(
+                        padding: EdgeInsets.only(right: expanded ? 0.0 : 8.0),
+                        child: const Icon(Icons.signal_cellular_alt_rounded,
                             color: Colors.yellow)),
                   ),
                 ),
               ],
             ),
-            if (expanded) _buildMiniPlayer(),
+            if (expanded) _buildMiniPlayer(size),
           ],
         ),
       ),
@@ -112,24 +97,28 @@ class MusicIslandWidget extends StatelessWidget {
         ),
       );
 
-  Widget _buildMiniPlayer() => Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          const SizedBox(height: 10.0),
-          _buildProgressBar(),
-          const SizedBox(height: 10.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.keyboard_double_arrow_left_outlined,
-                  color: Colors.white, size: 45),
-              Icon(Icons.pause, color: Colors.white, size: 45),
-              Icon(Icons.keyboard_double_arrow_right_outlined,
-                  color: Colors.white, size: 45),
-            ],
-          ),
-        ],
-      );
+  Widget _buildMiniPlayer(Size size) {
+    final double iconSize = (size.height / 2) * 0.5;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        const SizedBox(height: 10.0),
+        _buildProgressBar(),
+        const SizedBox(height: 10.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.keyboard_double_arrow_left_outlined,
+                color: Colors.white, size: iconSize),
+            Icon(Icons.pause, color: Colors.white, size: iconSize),
+            Icon(Icons.keyboard_double_arrow_right_outlined,
+                size: iconSize, color: Colors.white),
+          ],
+        ),
+      ],
+    );
+  }
 
   Widget _buildProgressBar() {
     const textGreyStyle = TextStyle(color: Colors.grey, fontSize: 10.0);
