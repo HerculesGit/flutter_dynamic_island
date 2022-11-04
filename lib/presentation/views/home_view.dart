@@ -4,6 +4,7 @@ import 'package:flutter_dynamic_island/presentation/widgets/music_island_widget.
 import 'package:provider/provider.dart';
 
 import '../controllers/animated_dynamic_island_controller.dart';
+import '../widgets/phone_island_widget.dart';
 import '../widgets/silent_island_widget.dart';
 
 class HomeView extends StatefulWidget {
@@ -20,7 +21,8 @@ class _HomeViewState extends State<HomeView> {
         .loadDynamicIsland([
       ChargingIslandWidget(),
       MusicIslandWidget(),
-      SilentIslandWidget()
+      SilentIslandWidget(),
+      PhoneIslandWidget(),
     ]);
     super.initState();
   }

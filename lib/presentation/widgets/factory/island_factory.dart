@@ -58,11 +58,13 @@ abstract class IslandFactory extends StatelessWidget {
       margin: const EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(borderRadius()),
       ),
       child: islandState != IslandState.none
           ? buildBody(context, Size(width, height))
           : Container(),
     );
   }
+
+  double borderRadius() => 25.0;
 }
