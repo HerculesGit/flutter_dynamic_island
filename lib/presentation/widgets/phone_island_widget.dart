@@ -1,8 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
 
 import 'animated_opacity_widget.dart';
-import 'dart:math' as math;
+import 'signal_frequency_widget.dart';
 
 class PhoneIslandWidget extends IslandFactory {
   PhoneIslandWidget({
@@ -51,12 +53,11 @@ class PhoneIslandWidget extends IslandFactory {
               opacity: opacity,
               isRight: true,
               child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: controller.islandState == IslandState.expanded
-                    ? _buildCallButtons(size)
-                    : const Text('IiIIIIi',
-                        style: const TextStyle(color: Colors.green)),
-              ),
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: controller.islandState == IslandState.expanded
+                      ? _buildCallButtons(size)
+                      : const SignalFrequencyWidget(
+                          maxHeight: 24, color: Colors.green)),
             ),
           ],
         ),

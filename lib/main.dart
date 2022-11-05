@@ -5,7 +5,7 @@ import 'config/routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(buildProviders(const MyApp()));
+  runApp(injectProviders(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: Colors.purple),
       onGenerateRoute: AppRoutes.onGenerateRoutes,
     );
   }

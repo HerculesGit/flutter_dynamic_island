@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dynamic_island/presentation/widgets/factory/island_factory.dart';
 
 import 'animated_opacity_widget.dart';
+import 'signal_frequency_widget.dart';
 
 class MusicIslandWidget extends IslandFactory {
   MusicIslandWidget({
@@ -23,7 +24,7 @@ class MusicIslandWidget extends IslandFactory {
       duration: const Duration(milliseconds: 200),
       padding: EdgeInsets.all(expanded ? 16.0 : 0.0),
       child: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -63,9 +64,9 @@ class MusicIslandWidget extends IslandFactory {
                     opacity: opacity,
                     isRight: false,
                     child: Padding(
-                        padding: EdgeInsets.only(right: expanded ? 0.0 : 8.0),
-                        child: const Icon(Icons.signal_cellular_alt_rounded,
-                            color: Colors.yellow)),
+                        padding: EdgeInsets.only(right: expanded ? 0.0 : 10.0),
+                        child: const SignalFrequencyWidget(
+                            maxHeight: 24, color: Colors.yellow)),
                   ),
                 ),
               ],

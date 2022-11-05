@@ -42,9 +42,7 @@ class _HomeViewState extends State<HomeView> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildDynamicIslandScaffold(controller),
-            ],
+            children: [controller.currentIsland.build(context)],
           ),
           Expanded(
             child: Padding(
@@ -58,9 +56,9 @@ class _HomeViewState extends State<HomeView> {
                         (island) => GestureDetector(
                           onTap: () => controller.didTapIsland(island),
                           child: Container(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             color: Colors.red,
-                            child: Text('${island.name}'),
+                            child: Text(island.name),
                           ),
                         ),
                       )
@@ -76,16 +74,16 @@ class _HomeViewState extends State<HomeView> {
                   onPressed: () {
                     controller.didTapBackButton();
                   },
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                 ),
                 if (controller.displayExpandedButton)
                   GestureDetector(
                     onTap: () => controller.didTapExpandButton(),
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 16),
                       color: Colors.blue,
-                      child: Text('Expand'),
+                      child: const Text('Expand'),
                     ),
                   )
               ],
@@ -94,9 +92,5 @@ class _HomeViewState extends State<HomeView> {
         ],
       );
     });
-  }
-
-  Widget buildDynamicIslandScaffold(AnimatedDynamicIsland controller) {
-    return controller.currentIsland.build(context);
   }
 }
