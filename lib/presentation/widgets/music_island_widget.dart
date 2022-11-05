@@ -23,7 +23,7 @@ class MusicIslandWidget extends IslandFactory {
       duration: const Duration(milliseconds: 200),
       padding: EdgeInsets.all(expanded ? 16.0 : 0.0),
       child: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

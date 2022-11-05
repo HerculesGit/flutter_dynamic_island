@@ -6,7 +6,6 @@ class AnimatedDynamicIsland extends ChangeNotifier {
   late IslandFactory currentIsland;
   bool displayBackButton = false;
   bool displayExpandedButton = false;
-  bool displayIslandList = true;
 
   final List<IslandFactory> dynamicIsland = [];
 
